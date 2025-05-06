@@ -1,0 +1,54 @@
+﻿@using CarDealership.Models.ViewModels;
+@using CarDealership.Models.ViewModels.Fabricante
+@model List<FabricanteViewModel>
+@{
+    ViewData["Title"] = "Fabricantes";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<a class="btn btn-primary" asp-controller="Fabricante" asp-action="Criar"><i class="bi bi-plus-circle"></i> Novo</a>
+
+@if(Model.Count > 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">País de Origem</th>
+                <th scope="col">Ano de fundação</th>
+                <th scope="col">Website</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach(FabricanteViewModel fabricante in Model)
+            {
+                <tr>
+                    <th scope="row">@fabricante.Id</th>
+                    <td>@fabricante.Nome</td>
+                    <td>@fabricante.PaisOrigem</td>
+                    <td>@fabricante.AnoFundacao</td>
+                    <td><a href="@fabricante.Website" target="_blank">Visitar site <i class="bi bi-box-arrow-up-right"></i></a></td>
+                    <td>
+                        @* <a href="" class="m-2 text-decoration-none" title="Detalhes" data-bs-toggle="modal" data-bs-target="#Modal_@fabricante.Id">
+                            <i class="bi bi-info-circle"></i>
+                        </a> *@
+                        <a class="m-2 text-decoration-none" asp-controller="Fabricante" asp-action="Editar" asp-route-id="@fabricante.Id" title="Editar">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a class="m-2" href="" data-bs-toggle="modal" data-bs-target="#Modal_Delete_@fabricante.Id" title="Excluir">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                @await Html.PartialAsync("Partials/_ModalDelete", new ModalDeleteViewModel() { IdElemento = fabricante.Id, NomeElemento = fabricante.Nome })
+            }
+        </tbody>
+    </table>
+} else
+{
+    <span class="color-red">Nenhum fabricante cadastrado.</span>
+}

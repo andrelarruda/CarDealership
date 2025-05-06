@@ -1,0 +1,27 @@
+﻿@using CarDealership.Models.ViewModels;
+@model ModalDeleteViewModel
+
+@{
+}
+
+<div class="modal fade" id="Modal_Delete_@Model.IdElemento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmar Deleção</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-center">Deseja apagar @Model.NomeElemento?</h3>
+                <p class="text-center text-danger">A ação não pode ser desfeita após a confirmação!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form asp-action="Excluir" asp-controller="Pessoa" asp-route-id="@Model.IdElemento" method="post">
+                    <button type="submit" class="btn btn-danger">Confirmar</button>
+                </form>
+                @* <a type="button" class="btn btn-danger" asp-controller="Pessoa" asp-action="Excluir" asp-route-id="@pessoa.Id">Excluir</a> *@
+            </div>
+        </div>
+    </div>
+</div>
