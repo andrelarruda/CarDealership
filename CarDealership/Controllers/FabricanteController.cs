@@ -16,50 +16,14 @@ namespace CarDealership.Controllers
         [HttpGet]
         public async Task<ActionResult<List<FabricanteViewModel>>> Index()
         {
-            //var result2 = await _fabricanteService.ListarFabricantes();
-            List<FabricanteViewModel> result = new List<FabricanteViewModel>()
-            {
-                new FabricanteViewModel()
-                {
-                    Id = 1,
-                    Nome = "Volkswagen",
-                    AnoFundacao = 1967,
-                    PaisOrigem = "Alemanha",
-                    Website = "https://www.vw.com.br/",
-                },
-                new FabricanteViewModel()
-                {
-                    Id = 2,
-                    Nome = "Fiat",
-                    AnoFundacao = 1988,
-                    PaisOrigem = "Italia",
-                    Website = "https://www.fiat.com.br/",
-                },
-                new FabricanteViewModel()
-                {
-                    Id = 3,
-                    Nome = "Chevrolet",
-                    AnoFundacao = 1956,
-                    PaisOrigem = "Estados Unidos da América",
-                    Website = "https://www.chevrolet.com.br/",
-                },
-                new FabricanteViewModel()
-                {
-                    Id = 4,
-                    Nome = "Ford",
-                    AnoFundacao = 1935,
-                    PaisOrigem = "Estados Unidos da América",
-                    Website = "https://www.ford.com.br/",
-                },
-            };
+            var result = await _fabricanteService.ListarFabricantes();
             return View(result);
         }
 
         [HttpGet]
         public IActionResult Criar()
         {
-            CriarEditarFabricanteViewModel<FabricanteViewModel> viewModel = new CriarEditarFabricanteViewModel<FabricanteViewModel>{ Modelo = new FabricanteViewModel() };
-            return View(viewModel);
+            return View(new FabricanteViewModel());
         }
 
         [HttpPost]
@@ -94,6 +58,52 @@ namespace CarDealership.Controllers
                 }
                 EditarFabricanteViewModel fabricante = await _fabricanteService.ListarPorId(id);
                 return View(fabricante);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                TempData["Error"] = ex.Message;
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Editar(EditarFabricanteViewModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    EditarFabricanteViewModel fabricante = await _fabricanteService.Editar(model);
+
+                    TempData["Sucesso"] = $"Fabricante {fabricante.Nome} atualizado com sucesso!";
+                    return RedirectToAction("Index", "Fabricante");
+                }
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Excluir(int id)
+        {
+            try
+            {
+                if (id == 0)
+                {
+                    throw new Exception("Um id deve ser informado.");
+                }
+                await _fabricanteService.Excluir(id);
+                TempData["Sucesso"] = "Usuario excluido com sucesso!";
+                return RedirectToAction("Index");
             }
             catch (KeyNotFoundException ex)
             {

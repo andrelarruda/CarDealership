@@ -34,10 +34,23 @@ namespace CarDealership.Services
             return model;
         }
 
+        public async Task<EditarFabricanteViewModel> Editar(EditarFabricanteViewModel fabricante)
+        {
+            await _fabricanteRepository.GetByIdAsync(fabricante.Id);
+            await _fabricanteRepository.Update(_mapper.Map<Fabricante>(fabricante));
+            return fabricante;
+        }
+
+        public async Task Excluir(int id)
+        {
+            Fabricante fabricante = await _fabricanteRepository.GetByIdAsync(id);
+            await _fabricanteRepository.Delete(fabricante);
+        }
+
         public async Task<List<FabricanteViewModel>> ListarFabricantes()
         {
             List<Fabricante> listaFabricantes = await _fabricanteRepository.GetAllAsync();
-            List<FabricanteViewModel> result = listaFabricantes.Select(f => _mapper.Map<FabricanteViewModel>(f)).ToList();
+            return listaFabricantes.Select(f => _mapper.Map<FabricanteViewModel>(f)).ToList();
             //var result = from fabricante in listaFabricantes
             //             select new FabricanteViewModel
             //             {
@@ -47,8 +60,6 @@ namespace CarDealership.Services
             //                 PaisOrigem = fabricante.PaisOrigem,
             //                 Website = fabricante.Website,
             //             };
-
-            return result.ToList();
 
         }
 

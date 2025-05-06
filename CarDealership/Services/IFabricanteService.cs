@@ -8,5 +8,7 @@ namespace CarDealership.Services
         Task<EditarFabricanteViewModel> ListarPorId(int id);
 
         Task<FabricanteViewModel> Criar(FabricanteViewModel fabricante);
+        Task<EditarFabricanteViewModel> Editar(EditarFabricanteViewModel fabricante);
+        Task Excluir(int id);
     }
 }

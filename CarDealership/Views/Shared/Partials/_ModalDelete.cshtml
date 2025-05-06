@@ -17,7 +17,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <form asp-action="Excluir" asp-controller="Pessoa" asp-route-id="@Model.IdElemento" method="post">
+                <form asp-action="Excluir" asp-controller="Fabricante" asp-route-id="@Model.IdElemento" method="post">
                     <button type="submit" class="btn btn-danger">Confirmar</button>
                 </form>
                 @* <a type="button" class="btn btn-danger" asp-controller="Pessoa" asp-action="Excluir" asp-route-id="@pessoa.Id">Excluir</a> *@

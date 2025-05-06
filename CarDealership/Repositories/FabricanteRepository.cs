@@ -27,9 +27,17 @@ namespace CarDealership.Repositories
             }
         }
 
-        public Task Delete(int id)
+        public async Task Delete(Fabricante fabricante)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Fabricantes.Remove(fabricante);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Algo deu errado ao deletar fabricante. {ex.Message}");
+            }
         }
 
         public async Task<List<Fabricante>> GetAllAsync()
@@ -56,9 +64,18 @@ namespace CarDealership.Repositories
             }
         }
 
-        public Task<Fabricante> Update(Fabricante fabricante)
+        public async Task<Fabricante> Update(Fabricante fabricante)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Update(fabricante);
+                await _context.SaveChangesAsync();
+                return fabricante;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Algo deu errado ao atualizar o fabricante: {ex.Message}");
+            }
         }
 
         public async Task<bool> VerificaSeFabricanteJaExiste(string nomeFabricante)
