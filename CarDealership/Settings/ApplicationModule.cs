@@ -29,12 +29,14 @@ namespace CarDealership.Settings
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IFabricanteService, FabricanteService>();
+            services.AddScoped<IVeiculoService, VeiculoService>();
             return services;
         }
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IFabricanteRepository, FabricanteRepository>();
+            services.AddScoped<IVeiculoRepository, VeiculoRepository>();
             return services;
         }
 

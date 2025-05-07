@@ -1,5 +1,75 @@
-﻿
+﻿@using CarDealership.Models.ViewModels
+@using CarDealership.Models.ViewModels.Veiculo
+
+@model List<VeiculoViewModel>
+
 @{
+    ViewData["Title"] = "Veículos";
 }
 
-<h1>Listagem de Veiculos</h1>
+<h1>@ViewData["Title"]</h1>
+
+@if (TempData["Sucesso"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Sucesso"]
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["Error"]
+    </div>
+}
+
+<a class="btn btn-primary" asp-controller="Veiculo" asp-action="Criar"><i class="bi bi-plus-circle"></i> Novo</a>
+
+@if (Model.Count > 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Ano de Fabricação</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Fabricante</th>
+                <th scope="col">Tipo de veículo</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (VeiculoViewModel veiculo in Model)
+            {
+                <tr>
+                    <th scope="row">@veiculo.Id</th>
+                    <td>@veiculo.Modelo</td>
+                    <td>@veiculo.AnoFabricacao</td>
+                    <td>@veiculo.Preco</td>
+                    <td>@veiculo.Fabricante.Nome</td>
+                    <td>@veiculo.TipoVeiculo</td>
+                    <td>@veiculo.Descricao</td>
+                    <td>
+                        @* <a href="" class="m-2 text-decoration-none" title="Detalhes" data-bs-toggle="modal" data-bs-target="#Modal_@fabricante.Id">
+                            <i class="bi bi-info-circle"></i>
+                        </a> *@
+                        <a class="m-2 text-decoration-none" asp-controller="Veiculo" asp-action="Editar" asp-route-id="@veiculo.Id" title="Editar">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a class="m-2" href="" data-bs-toggle="modal" data-bs-target="#Modal_Delete_@veiculo.Id" title="Excluir">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                @await Html.PartialAsync("Partials/_ModalDelete", new ModalDeleteViewModel() { IdElemento = veiculo.Id, NomeElemento = veiculo.Modelo, ControllerName = "Veiculo" })
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <span class="color-red">Nenhum veículo cadastrado.</span>
+}

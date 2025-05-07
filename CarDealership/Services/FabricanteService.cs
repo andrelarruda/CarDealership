@@ -43,23 +43,13 @@ namespace CarDealership.Services
 
         public async Task Excluir(int id)
         {
-            Fabricante fabricante = await _fabricanteRepository.GetByIdAsync(id);
-            await _fabricanteRepository.Delete(fabricante);
+            await _fabricanteRepository.Delete(id);
         }
 
         public async Task<List<FabricanteViewModel>> ListarFabricantes()
         {
             List<Fabricante> listaFabricantes = await _fabricanteRepository.GetAllAsync();
             return listaFabricantes.Select(f => _mapper.Map<FabricanteViewModel>(f)).ToList();
-            //var result = from fabricante in listaFabricantes
-            //             select new FabricanteViewModel
-            //             {
-            //                 Id = fabricante.Id,
-            //                 Nome = fabricante.Nome,
-            //                 AnoFundacao = fabricante.AnoFundacao,
-            //                 PaisOrigem = fabricante.PaisOrigem,
-            //                 Website = fabricante.Website,
-            //             };
 
         }
 

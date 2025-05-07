@@ -13,6 +13,5 @@ namespace CarDealership.Models
         public Fabricante Fabricante { get; set; }
         public ETipoVeiculo TipoVeiculo { get; set; }
         public string? Descricao { get; set; }
-
     }
 }

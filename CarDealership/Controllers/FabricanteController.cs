@@ -102,7 +102,7 @@ namespace CarDealership.Controllers
                     throw new Exception("Um id deve ser informado.");
                 }
                 await _fabricanteService.Excluir(id);
-                TempData["Sucesso"] = "Usuario excluido com sucesso!";
+                TempData["Sucesso"] = "Fabricante excluido com sucesso!";
                 return RedirectToAction("Index");
             }
             catch (KeyNotFoundException ex)

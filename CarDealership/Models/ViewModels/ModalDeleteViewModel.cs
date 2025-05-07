@@ -4,5 +4,6 @@
     {
         public int IdElemento { get; set; }
         public string NomeElemento { get; set; }
+        public string ControllerName { get; set; }
     }
 }

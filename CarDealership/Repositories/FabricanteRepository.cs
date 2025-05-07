@@ -27,11 +27,16 @@ namespace CarDealership.Repositories
             }
         }
 
-        public async Task Delete(Fabricante fabricante)
+        public async Task Delete(int id)
         {
             try
             {
-                _context.Fabricantes.Remove(fabricante);
+                var fabricante = await _context.Fabricantes.FirstOrDefaultAsync(p => p.Id == id);
+                if (fabricante == null)
+                {
+                    throw new KeyNotFoundException("Fabricante nao encontrado.");
+                }
+                fabricante.IsDeleted = true;
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)

@@ -2,13 +2,8 @@
 
 namespace CarDealership.Repositories
 {
-    public interface IFabricanteRepository
+    public interface IFabricanteRepository : ICrudRepository<Fabricante>
     {
-        Task<List<Fabricante>> GetAllAsync();
-        Task<Fabricante> GetByIdAsync(int id);
-        Task<Fabricante> Create(Fabricante fabricante);
-        Task<Fabricante> Update(Fabricante fabricante);
-        Task Delete(Fabricante fabricante);
         Task<bool> VerificaSeFabricanteJaExiste(string nomeFabricante);
     }
 }
