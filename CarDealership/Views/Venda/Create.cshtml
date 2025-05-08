@@ -34,12 +34,8 @@
                 <label class="form-label">@Html.DisplayNameFor(f => f.ConcessionariaId)</label>
                 @if (Model.OpcoesConcessionarias != null)
                 {
-                    <select class="form-select" aria-label="Default select example" asp-for="ConcessionariaId">
-                        <option selected>Selecione a concessionaria</option>
-                        @foreach (ConcessionariaViewModel concessionaria in Model?.OpcoesConcessionarias)
-                        {
-                            <option value=@concessionaria.Id>@concessionaria.Nome</option>
-                        }
+                    <select asp-for="ConcessionariaId" asp-items="@(new SelectList(Model.OpcoesConcessionarias, "Id", "Nome"))" class="form-control">
+                        <option value="">Selecione a concessionaria</option>
                     </select>
                 }
                 <span asp-validation-for="ConcessionariaId" class="text-danger"></span>
