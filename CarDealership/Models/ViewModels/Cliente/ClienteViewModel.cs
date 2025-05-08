@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace CarDealership.Models.ViewModels.Cliente
 {
@@ -10,9 +11,11 @@ namespace CarDealership.Models.ViewModels.Cliente
 
         [Required]
         [MaxLength(11, ErrorMessage = "O CPF deve ter no maximo 11 caracteres.")]
+        [DisplayName("CPF do cliente")]
         public string CPF { get; set; }
 
         [MaxLength(15, ErrorMessage = "O Telefone deve ter no máximo 15 caracteres.")]
+        [DisplayName("Telefone do cliente")]
         public string Telefone { get; set; }
     }
 }

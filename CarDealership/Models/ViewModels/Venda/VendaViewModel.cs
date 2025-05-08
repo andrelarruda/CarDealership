@@ -16,8 +16,8 @@ namespace CarDealership.Models.ViewModels.Venda
         [DisplayName("Veiculo")]
         public int VeiculoId { get; set; }
 
-        //[ValidateNever]
-        //public VeiculoViewModel Veiculo { get; set; }
+        [ValidateNever]
+        public VeiculoViewModel Veiculo { get; set; }
 
         [Required(ErrorMessage = "É obrigatório selecionar a Concessionária.")]
         [DisplayName("Concessionária")]
@@ -26,7 +26,7 @@ namespace CarDealership.Models.ViewModels.Venda
         [ValidateNever]
         public ConcessionariaViewModel Concessionaria { get; set; }
 
-        [Required(ErrorMessage = "É obrigatório selecionar o Cliente.")]
+        //[Required(ErrorMessage = "É obrigatório selecionar o Cliente.")]
         [DisplayName("Cliente")]
         public int ClienteId { get; set; }
 

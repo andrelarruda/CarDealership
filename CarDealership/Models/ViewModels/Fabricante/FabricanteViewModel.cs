@@ -11,7 +11,7 @@ namespace CarDealership.Models.ViewModels.Fabricante
 
         [MaxLength(100, ErrorMessage = "O Nome deve ter no máximo 100 caracteres.")]
         [Required(ErrorMessage = "É obrigatório informar o {0}")]
-        [DisplayName("Nome da fabricante")]
+        [DisplayName("Marca")]
         public string Nome { get; set; }
 
         [DisplayName("País de Origem")]

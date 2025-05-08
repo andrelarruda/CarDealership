@@ -51,7 +51,7 @@ namespace CarDealership.Repositories
             return await _context.Vendas
                 .Include(v => v.Concessionaria)
                 .Include(v => v.Cliente)
-                .Include(v => v.Veiculo)
+                .Include(v => v.Veiculo).ThenInclude(v => v.Fabricante)
                 .Where(f => !f.IsDeleted)
                 .ToListAsync();
         }
@@ -60,7 +60,11 @@ namespace CarDealership.Repositories
         {
             try
             {
-                var entity = await _context.Vendas.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
+                var entity = await _context.Vendas
+                    .Include(v => v.Concessionaria)
+                    .Include(v => v.Cliente)
+                    .Include(v => v.Veiculo).ThenInclude(v => v.Fabricante)
+                    .AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
                 if (entity == null)
                 {
                     throw new KeyNotFoundException("Veiculo nao encontrado.");

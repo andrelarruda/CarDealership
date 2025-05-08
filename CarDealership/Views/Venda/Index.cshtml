@@ -1,4 +1,5 @@
-﻿@model IEnumerable<CarDealership.Models.ViewModels.Venda.VendaViewModel>
+﻿@using CarDealership.Models.ViewModels.Venda
+@model IEnumerable<VendaViewModel>
 
 @{
     ViewData["Title"] = "Vendas";
@@ -27,13 +28,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.VeiculoId)
+                @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Concessionaria)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Veiculo.Fabricante.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Veiculo)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DataVenda)
@@ -48,16 +55,22 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (VendaViewModel item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.VeiculoId)
+                @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Concessionaria.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cliente.CPF)
+                @Html.DisplayFor(modelItem => item.Cliente.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Veiculo.Fabricante.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Veiculo.Modelo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DataVenda)

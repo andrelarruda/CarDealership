@@ -14,6 +14,7 @@ namespace CarDealership.Models.ViewModels.Veiculo
         public int Id { get; set; }
 
         [MaxLength(100, ErrorMessage = "O Modelo deve ter no máximo 100 caracteres.")]
+        [DisplayName("Modelo do veiculo")]
         public string Modelo { get; set; }
 
         [DisplayName("Ano de fabricação")]
