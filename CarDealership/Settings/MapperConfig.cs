@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using CarDealership.Models;
+using CarDealership.Models.ViewModels.Cliente;
 using CarDealership.Models.ViewModels.Concessionaria;
 using CarDealership.Models.ViewModels.Fabricante;
 using CarDealership.Models.ViewModels.Veiculo;
+using CarDealership.Models.ViewModels.Venda;
 
 namespace CarDealership.Settings
 {
@@ -17,6 +19,12 @@ namespace CarDealership.Settings
                 .ReverseMap();
 
             CreateMap<Concessionaria, ConcessionariaViewModel>()
+                .ReverseMap();
+
+            CreateMap<Venda, VendaViewModel>()
+                .ReverseMap();
+
+            CreateMap<Cliente, ClienteViewModel>()
                 .ReverseMap();
         }
     }

@@ -1,5 +1,83 @@
-﻿
+﻿@model IEnumerable<CarDealership.Models.ViewModels.Venda.VendaViewModel>
+
 @{
+    ViewData["Title"] = "Vendas";
 }
 
-<h1>Listagem de Vendas</h1>
+<h1>@ViewData["Title"]</h1>
+
+@if (TempData["Sucesso"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Sucesso"]
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["Error"]
+    </div>
+}
+
+<p>
+    <a class="btn btn-primary" asp-action="Create"><i class="bi bi-plus-circle"></i> Nova</a>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Veiculo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Concessionaria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataVenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecoVenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProtocoloVenda)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Veiculo.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Concessionaria.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.CPF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataVenda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecoVenda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProtocoloVenda)
+            </td>
+            <td>
+                <a class="m-2 text-decoration-none" asp-controller="Venda" asp-action="Edit" asp-route-id="@item.Id" title="Editar">
+                    <i class="bi bi-pencil"></i>
+                </a>
+                | <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a class="m-2" href="" data-bs-toggle="modal" data-bs-target="#Modal_Delete_@item.Id" title="Excluir">
+                    <i class="bi bi-trash"></i>
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

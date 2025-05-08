@@ -10,12 +10,10 @@ namespace CarDealership.Controllers
 {
     public class ConcessionariaController : Controller
     {
-        private readonly CarDealershipContext _context;
         private readonly IConcessionariaService _service;
 
-        public ConcessionariaController(CarDealershipContext context, IConcessionariaService concessionariaService)
+        public ConcessionariaController(IConcessionariaService concessionariaService)
         {
-            _context = context;
             _service = concessionariaService;
         }
 
@@ -113,11 +111,6 @@ namespace CarDealership.Controllers
                 }
                 await _service.Excluir(id);
                 TempData["Sucesso"] = "Concessionaria excluida com sucesso!";
-                return RedirectToAction("Index", "Concessionaria");
-            }
-            catch (KeyNotFoundException ex)
-            {
-                TempData["Error"] = ex.Message;
                 return RedirectToAction("Index", "Concessionaria");
             }
             catch (Exception ex)
