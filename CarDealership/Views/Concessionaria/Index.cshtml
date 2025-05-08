@@ -1,6 +1,98 @@
-﻿
+﻿@using CarDealership.Models.ViewModels
+@using CarDealership.Models.ViewModels.Concessionaria;
+@model IEnumerable<ConcessionariaViewModel>
 
 @{
+    ViewData["Title"] = "Concessionárias";
 }
 
-<h1>Listagem de Concessionárias</h1>
+<h1>@ViewData["Title"]</h1>
+
+@if (TempData["Sucesso"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Sucesso"]
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["Error"]
+    </div>
+}
+
+<p>
+    <a class="btn btn-primary" asp-action="Create"><i class="bi bi-plus-circle"></i> Novo</a>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Endereco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CEP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CapacidadeMaximaVeiculos)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Endereco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CEP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CapacidadeMaximaVeiculos)
+            </td>
+            <td>
+                <a class="m-2 text-decoration-none" asp-controller="Concessionaria" asp-action="Edit" asp-route-id="@item.Id" title="Editar">
+                    <i class="bi bi-pencil"></i>
+                </a>
+                | <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a class="m-2" href="" data-bs-toggle="modal" data-bs-target="#Modal_Delete_@item.Id" title="Excluir">
+                    <i class="bi bi-trash"></i>
+                </a>
+            </td>
+        </tr>
+            @await Html.PartialAsync("Partials/_ModalDelete", new ModalDeleteViewModel() { IdElemento = item.Id, NomeElemento = item.Nome, ControllerName = "Concessionaria" })
+}
+    </tbody>
+</table>

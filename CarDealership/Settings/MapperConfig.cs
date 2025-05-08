@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CarDealership.Models;
+using CarDealership.Models.ViewModels.Concessionaria;
 using CarDealership.Models.ViewModels.Fabricante;
 using CarDealership.Models.ViewModels.Veiculo;
 
@@ -13,6 +14,9 @@ namespace CarDealership.Settings
 
             CreateMap<Veiculo, VeiculoViewModel>()
                 //.ForMember(veiculoVM => veiculoVM.Fabricante, x => x.MapFrom(veiculo => veiculo.Fabricante))
+                .ReverseMap();
+
+            CreateMap<Concessionaria, ConcessionariaViewModel>()
                 .ReverseMap();
         }
     }

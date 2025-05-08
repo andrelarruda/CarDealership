@@ -30,6 +30,7 @@ namespace CarDealership.Settings
         {
             services.AddScoped<IFabricanteService, FabricanteService>();
             services.AddScoped<IVeiculoService, VeiculoService>();
+            services.AddScoped<IConcessionariaService, ConcessionariaService>();
             return services;
         }
 
@@ -37,6 +38,7 @@ namespace CarDealership.Settings
         {
             services.AddScoped<IFabricanteRepository, FabricanteRepository>();
             services.AddScoped<IVeiculoRepository, VeiculoRepository>();
+            services.AddScoped<IConcessionariaRepository, ConcessionariaRepository>();
             return services;
         }
 

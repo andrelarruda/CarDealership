@@ -1,14 +1,14 @@
 ﻿@using CarDealership.Models.ViewModels.Fabricante
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+
 
 @model FabricanteViewModel
 @{
-    ViewData["Title"] = "Criar";
+    ViewData["Title"] = "Criar Fabricante";
 }
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
 
 @if (TempData["Error"] != null)
 {
@@ -16,29 +16,33 @@
         @TempData["Error"]
     </div>
 }
-<form asp-action="Criar" asp-controller="Fabricante" method="post">
-    <div class="form-group mb-2">
-        <label class="form-label">@Html.DisplayNameFor(f => f.Nome)</label>
-        <input type="text" class="form-control" placeholder="Fabricante" asp-for="Nome">
-        <span asp-validation-for="Nome" class="text-danger"></span>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Criar" asp-controller="Fabricante" method="post">
+            <div class="form-group mb-2">
+                <label class="form-label">@Html.DisplayNameFor(f => f.Nome)</label>
+                <input type="text" class="form-control" placeholder="Fabricante" asp-for="Nome">
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2">
+                <label class="form-label">@Html.DisplayNameFor(f => f.PaisOrigem)</label>
+                <input type="text" class="form-control" placeholder="Brasil" asp-for="PaisOrigem">
+                <span asp-validation-for="PaisOrigem" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2">
+                <label class="form-label">@Html.DisplayNameFor(f => f.AnoFundacao)</label>
+                <input type="number" class="form-control" placeholder="xxxx" asp-for="AnoFundacao">
+                <span asp-validation-for="AnoFundacao" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2">
+                <label class="form-label">@Html.DisplayNameFor(f => f.Website)</label>
+                <input type="text" class="form-control" asp-for="Website">
+                <span asp-validation-for="Website" class="text-danger"></span>
+            </div>
+            <div class="btn-group" role="group">
+                <a class="btn btn-outline-primary" asp-controller="Fabricante" asp-action="Index">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </form>
     </div>
-    <div class="form-group mb-2">
-        <label class="form-label">@Html.DisplayNameFor(f => f.PaisOrigem)</label>
-        <input type="text" class="form-control" placeholder="Brasil" asp-for="PaisOrigem">
-        <span asp-validation-for="PaisOrigem" class="text-danger"></span>
-    </div>
-    <div class="form-group mb-2">
-        <label class="form-label">@Html.DisplayNameFor(f => f.AnoFundacao)</label>
-        <input type="number" class="form-control" placeholder="xxxx" asp-for="AnoFundacao">
-        <span asp-validation-for="AnoFundacao" class="text-danger"></span>
-    </div>
-    <div class="form-group mb-2">
-        <label class="form-label">@Html.DisplayNameFor(f => f.Website)</label>
-        <input type="text" class="form-control" asp-for="Website">
-        <span asp-validation-for="Website" class="text-danger"></span>
-    </div>
-    <div class="btn-group" role="group">
-        <a class="btn btn-outline-primary" asp-controller="Fabricante" asp-action="Index">Cancelar</a>
-        <button type="submit" class="btn btn-primary">Salvar</button>
-    </div>
-</form>
+</div>

@@ -4,22 +4,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarDealership.Repositories
 {
-    public class VeiculoRepository : IVeiculoRepository
+    public class ConcessionariaRepository : IConcessionariaRepository
     {
         private readonly CarDealershipContext _context;
 
-        public VeiculoRepository(CarDealershipContext context)
+        public ConcessionariaRepository(CarDealershipContext context)
         {
             _context = context;
         }
 
-        public async Task<Veiculo> Create(Veiculo veiculo)
+        public async Task<Concessionaria> Create(Concessionaria entity)
         {
             try
             {
-                await _context.Veiculos.AddAsync(veiculo);
+                await _context.Concessionarias.AddAsync(entity);
                 await _context.SaveChangesAsync();
-                return veiculo;
+                return entity;
             }
             catch (Exception ex)
             {
@@ -31,38 +31,37 @@ namespace CarDealership.Repositories
         {
             try
             {
-                var veiculo = await _context.Veiculos.FirstOrDefaultAsync(p => p.Id == id);
-                if (veiculo == null)
+                var entity = await _context.Concessionarias.FirstOrDefaultAsync(p => p.Id == id);
+                if (entity == null)
                 {
-                    throw new KeyNotFoundException("Veiculo nao encontrado.");
+                    throw new KeyNotFoundException("Concessionaria nao encontrado.");
                 }
-                veiculo.IsDeleted = true;
+                entity.IsDeleted = true;
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                throw new Exception($"Algo deu errado ao deletar veiculo. {ex.Message}");
+                throw new Exception($"Algo deu errado ao deletar concessionaria. {ex.Message}");
             }
         }
 
-        public async Task<List<Veiculo>> GetAllAsync()
+        public async Task<List<Concessionaria>> GetAllAsync()
         {
-            return await _context.Veiculos
-                .Include(v => v.Fabricante)
+            return await _context.Concessionarias
                 .Where(f => !f.IsDeleted)
                 .ToListAsync();
         }
 
-        public async Task<Veiculo> GetByIdAsync(int id)
+        public async Task<Concessionaria> GetByIdAsync(int id)
         {
             try
             {
-                var veiculo = await _context.Veiculos.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
-                if (veiculo == null)
+                var entity = await _context.Concessionarias.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
+                if (entity == null)
                 {
                     throw new KeyNotFoundException("Veiculo nao encontrado.");
                 }
-                return veiculo;
+                return entity;
             }
             catch (Exception ex)
             {
@@ -70,23 +69,18 @@ namespace CarDealership.Repositories
             }
         }
 
-        public async Task<Veiculo> Update(Veiculo veiculo)
+        public async Task<Concessionaria> Update(Concessionaria entity)
         {
             try
             {
-                _context.Update(veiculo);
+                _context.Update(entity);
                 await _context.SaveChangesAsync();
-                return veiculo;
+                return entity;
             }
             catch (Exception ex)
             {
                 throw new Exception($"Algo deu errado ao atualizar o fabricante: {ex.Message}");
             }
-        }
-
-        public async Task<bool> VerificaSeVeiculoJaExiste(string modeloVeiculo)
-        {
-            return await _context.Fabricantes.AnyAsync(f => f.Nome.ToLower() == modeloVeiculo.ToLower());
         }
     }
 }
