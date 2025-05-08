@@ -19,7 +19,7 @@ namespace CarDealership.Services
             _mapper = mapper;
         }
 
-        public async Task<Cliente> Criar(ClienteViewModel model)
+        public async Task<Cliente> Criar(CriarClienteViewModel model)
         {
             return await _repository.Create(_mapper.Map<Cliente>(model));
         }

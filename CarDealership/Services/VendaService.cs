@@ -27,20 +27,20 @@ namespace CarDealership.Services
             _logger = logger;
         }
 
-        public async Task<VendaViewModel> Criar(VendaViewModel viewModel)
+        public async Task<CriarVendaViewModel> Criar(CriarVendaViewModel viewModel)
         {
             try
             {
-                if (viewModel.Cliente.Id != 0)
+                if (viewModel.Cliente.Id.HasValue && viewModel.Cliente.Id.Value != 0)
                 {
-                    viewModel.ClienteId = viewModel.Cliente.Id;
+                    viewModel.ClienteId = viewModel.Cliente.Id.Value;
                 }
                 else
                 {
                     Cliente clienteCriado = await _clienteService.Criar(viewModel.Cliente);
                     viewModel.ClienteId = clienteCriado.Id;
-                    //viewModel.Cliente = null;
                 }
+                viewModel.Cliente = null;
                 var vendaCriada = await _repository.Create(_mapper.Map<Venda>(viewModel));
                 _logger.Log(LogLevel.Information, "Venda criada com sucesso.");
             }
@@ -76,12 +76,13 @@ namespace CarDealership.Services
             return listaEntidades.Select(f => _mapper.Map<VendaViewModel>(f)).ToList();
         }
 
-        public async Task<VendaViewModel> ObterVendaViewModel()
+        public async Task<CriarVendaViewModel> ObterVendaViewModel()
         {
-            VendaViewModel result = new VendaViewModel();
+            CriarVendaViewModel result = new CriarVendaViewModel();
             result.OpcoesConcessionarias = await _concessionariaService.ListarConcessionarias();
             result.OpcoesVeiculos = await _veiculoService.ListarVeiculos();
             result.OpcoesClientes = await _clienteService.ListarClientes();
+            result.ProtocoloVenda = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 20);
             return result;
         }
     }

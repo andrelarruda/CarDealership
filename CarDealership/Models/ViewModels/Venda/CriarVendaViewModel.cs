@@ -1,14 +1,13 @@
 ﻿using CarDealership.Models.ViewModels.Cliente;
 using CarDealership.Models.ViewModels.Concessionaria;
 using CarDealership.Models.ViewModels.Veiculo;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
-using CarDealership.Models.ViewModels.Fabricante;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace CarDealership.Models.ViewModels.Venda
 {
-    public class VendaViewModel : IValidatableObject
+    public class CriarVendaViewModel
     {
         public int Id { get; set; }
 
@@ -23,22 +22,21 @@ namespace CarDealership.Models.ViewModels.Venda
         [DisplayName("Concessionária")]
         public int ConcessionariaId { get; set; }
 
-        [ValidateNever]
-        public ConcessionariaViewModel Concessionaria { get; set; }
-
-        [Required(ErrorMessage = "É obrigatório selecionar o Cliente.")]
+        //[Required(ErrorMessage = "É obrigatório selecionar o Cliente.")]
         [DisplayName("Cliente")]
+        [ValidateNever]
         public int ClienteId { get; set; }
 
-        public ClienteViewModel Cliente { get; set; }
+        public CriarClienteViewModel Cliente { get; set; }
 
         [DisplayName("Data da venda")]
-        public DateTime DataVenda { get; set; }
+        public DateTime DataVenda { get; set; } = DateTime.Now;
 
         [DisplayName("Preço da venda")]
         public decimal PrecoVenda { get; set; }
 
         [DisplayName("Protocolo da venda")]
+        [StringLength(20)]
         public string ProtocoloVenda { get; set; }
 
         [ValidateNever]
@@ -49,19 +47,5 @@ namespace CarDealership.Models.ViewModels.Venda
 
         [ValidateNever]
         public List<ClienteViewModel> OpcoesClientes { get; set; }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            //if (PrecoVenda > Veiculo.Preco)
-            //{
-            //    yield return new ValidationResult($"O preço da venda deve ser menor ou igual ao preço do veículo.", new[] { nameof(PrecoVenda) });
-            //}
-
-            if (ProtocoloVenda != null && ProtocoloVenda.Length > 20)
-            {
-                yield return new ValidationResult($"O protocolo da venda deve ter no maximo 20 caracteres.", new[] { nameof(ProtocoloVenda) });
-            }
-        }
-
     }
 }

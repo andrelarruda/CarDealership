@@ -17,7 +17,6 @@ namespace CarDealership.Repositories
         {
             try
             {
-                entity.Cliente = null;
                 await _context.Vendas.AddAsync(entity);
                 await _context.SaveChangesAsync();
                 return entity;

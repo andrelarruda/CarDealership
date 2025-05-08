@@ -7,7 +7,7 @@ namespace CarDealership.Services
 {
     public interface IClienteService
     {
-        Task<Cliente> Criar(ClienteViewModel model);
+        Task<Cliente> Criar(CriarClienteViewModel model);
         Task<ActionResult> ConsultarPorCPF(string cpf);
         Task<List<ClienteViewModel>> ListarClientes();
     }

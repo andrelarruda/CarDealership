@@ -23,8 +23,12 @@ namespace CarDealership.Settings
 
             CreateMap<Venda, VendaViewModel>()
                 .ReverseMap();
+            CreateMap<Venda, CriarVendaViewModel>()
+                .ReverseMap();
 
             CreateMap<Cliente, ClienteViewModel>()
+                .ReverseMap();
+            CreateMap<Cliente, CriarClienteViewModel>()
                 .ReverseMap();
         }
     }

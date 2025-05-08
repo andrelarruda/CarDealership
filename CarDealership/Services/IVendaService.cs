@@ -10,9 +10,9 @@ namespace CarDealership.Services
 
         Task<VendaViewModel> ListarPorId(int id);
 
-        Task<VendaViewModel> Criar(VendaViewModel venda);
+        Task<CriarVendaViewModel> Criar(CriarVendaViewModel venda);
         Task<VendaViewModel> Editar(VendaViewModel venda);
         Task Excluir(int id);
-        Task<VendaViewModel> ObterVendaViewModel();
+        Task<CriarVendaViewModel> ObterVendaViewModel();
     }
 }

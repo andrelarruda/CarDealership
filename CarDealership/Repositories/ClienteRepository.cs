@@ -13,9 +13,18 @@ namespace CarDealership.Repositories
             _context = context;
         }
 
-        public Task<Cliente> Create(Cliente entity)
+        public async Task<Cliente> Create(Cliente entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _context.Clientes.AddAsync(entity);
+                await _context.SaveChangesAsync();
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ocorreu um erro no banco de dados: {ex.Message}");
+            }
         }
 
         public Task Delete(int id)

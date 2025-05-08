@@ -48,7 +48,7 @@ namespace CarDealership.Controllers
         }
 
         // GET: Venda/Create
-        public async Task<ActionResult<VendaViewModel>> Create()
+        public async Task<ActionResult<CriarVendaViewModel>> Create()
         {
             var result = await _service.ObterVendaViewModel();
             return View(result);
@@ -57,7 +57,7 @@ namespace CarDealership.Controllers
         // POST: Venda/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(VendaViewModel venda)
+        public async Task<IActionResult> Create(CriarVendaViewModel venda)
         {
             try
             {
@@ -72,7 +72,9 @@ namespace CarDealership.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                TempData["Error"] = $"Erro ao criar venda!";
+                venda = await _service.ObterVendaViewModel();
+                return View(venda);
             }
         }
 
