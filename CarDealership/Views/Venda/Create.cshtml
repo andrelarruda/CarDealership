@@ -25,12 +25,8 @@
                 <label class="form-label">@Html.DisplayNameFor(f => f.VeiculoId)</label>
                 @if (Model.OpcoesVeiculos != null)
                 {
-                    <select class="form-select" aria-label="Default select example" asp-for="VeiculoId">
-                        <option selected>Selecione o veiculo</option>
-                        @foreach (VeiculoViewModel veiculo in Model?.OpcoesVeiculos)
-                        {
-                            <option value=@veiculo.Id>@veiculo.Modelo</option>
-                        }
+                    <select asp-for="VeiculoId" asp-items="@(new SelectList(Model.OpcoesVeiculos, "Id", "Modelo"))" class="form-control">
+                        <option value="">Selecione o veiculo</option>
                     </select>
                 }
             </div>
