@@ -11,13 +11,22 @@ namespace CarDealership.Models.ViewModels.Venda
     public class VendaViewModel : IValidatableObject
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "É obrigatório selecionar o Veículo.")]
         [DisplayName("Veiculo")]
         public int VeiculoId { get; set; }
-        public VeiculoViewModel Veiculo { get; set; }
+
+        //[ValidateNever]
+        //public VeiculoViewModel Veiculo { get; set; }
+
+        [Required(ErrorMessage = "É obrigatório selecionar a Concessionária.")]
         [DisplayName("Concessionária")]
         public int ConcessionariaId { get; set; }
 
+        [ValidateNever]
         public ConcessionariaViewModel Concessionaria { get; set; }
+
+        [Required(ErrorMessage = "É obrigatório selecionar o Cliente.")]
         [DisplayName("Cliente")]
         public int ClienteId { get; set; }
 
@@ -43,12 +52,12 @@ namespace CarDealership.Models.ViewModels.Venda
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (PrecoVenda > Veiculo.Preco)
-            {
-                yield return new ValidationResult($"O preço da venda deve ser menor ou igual ao preço do veículo.", new[] { nameof(PrecoVenda) });
-            }
+            //if (PrecoVenda > Veiculo.Preco)
+            //{
+            //    yield return new ValidationResult($"O preço da venda deve ser menor ou igual ao preço do veículo.", new[] { nameof(PrecoVenda) });
+            //}
 
-            if (ProtocoloVenda != null && ProtocoloVenda.Length < 20)
+            if (ProtocoloVenda != null && ProtocoloVenda.Length > 20)
             {
                 yield return new ValidationResult($"O protocolo da venda deve ter no maximo 20 caracteres.", new[] { nameof(ProtocoloVenda) });
             }

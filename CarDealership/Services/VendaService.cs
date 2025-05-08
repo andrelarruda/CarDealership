@@ -15,19 +15,39 @@ namespace CarDealership.Services
         private readonly IConcessionariaService _concessionariaService;
         private readonly IVeiculoService _veiculoService;
         private readonly IClienteService _clienteService;
+        private readonly ILogger _logger;
 
-        public VendaService(IVendaRepository repository, IMapper mapper, IConcessionariaService concessionariaService, IVeiculoService veiculoService, IClienteService clienteService)
+        public VendaService(IVendaRepository repository, IMapper mapper, IConcessionariaService concessionariaService, IVeiculoService veiculoService, IClienteService clienteService, ILogger<VendaService> logger)
         {
             _repository = repository;
             _mapper = mapper;
             _concessionariaService = concessionariaService;
             _veiculoService = veiculoService;
             _clienteService = clienteService;
+            _logger = logger;
         }
 
         public async Task<VendaViewModel> Criar(VendaViewModel viewModel)
         {
-            var vendaCriada = await _repository.Create(_mapper.Map<Venda>(viewModel));
+            try
+            {
+                if (viewModel.Cliente.Id != 0)
+                {
+                    viewModel.ClienteId = viewModel.Cliente.Id;
+                }
+                else
+                {
+                    Cliente clienteCriado = await _clienteService.Criar(viewModel.Cliente);
+                    viewModel.ClienteId = clienteCriado.Id;
+                    //viewModel.Cliente = null;
+                }
+                var vendaCriada = await _repository.Create(_mapper.Map<Venda>(viewModel));
+                _logger.Log(LogLevel.Information, "Venda criada com sucesso.");
+            }
+            catch (Exception ex) {
+                _logger.Log(LogLevel.Error, ex.Message);
+                throw;
+            }
             return viewModel;
         }
 

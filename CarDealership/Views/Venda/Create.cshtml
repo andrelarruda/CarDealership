@@ -19,7 +19,7 @@
                 @if (Model.OpcoesVeiculos != null)
                 {
                     <select class="form-select" aria-label="Default select example" asp-for="VeiculoId">
-                        <option selected>Selecione o fabricante</option>
+                        <option selected>Selecione o veiculo</option>
                         @foreach (VeiculoViewModel veiculo in Model?.OpcoesVeiculos)
                         {
                             <option value=@veiculo.Id>@veiculo.Modelo</option>
@@ -27,10 +27,6 @@
                     </select>
                 }
             </div>
-            @* <div class="form-group">
-                <label asp-for="VeiculoId" class="control-label"></label>
-                <select asp-for="VeiculoId" class ="form-control" asp-items="ViewBag.VeiculoId"></select>
-            </div> *@
             <div class="form-group mb-2">
                 <label class="form-label">@Html.DisplayNameFor(f => f.ConcessionariaId)</label>
                 @if (Model.OpcoesConcessionarias != null)
@@ -44,11 +40,7 @@
                     </select>
                 }
             </div>
-            @* <div class="form-group">
-                <label asp-for="ConcessionariaId" class="control-label"></label>
-                <select asp-for="ConcessionariaId" class ="form-control" asp-items="ViewBag.ConcessionariaId"></select>
-            </div> *@
-            <div class="form-group mb-2">
+            @* <div class="form-group mb-2">
                 <label class="form-label">@Html.DisplayNameFor(f => f.ClienteId)</label>
                 @if (Model.OpcoesClientes != null)
                 {
@@ -60,11 +52,26 @@
                         }
                     </select>
                 }
-            </div>
-            @* <div class="form-group">
-                <label asp-for="ClienteId" class="control-label"></label>
-                <select asp-for="ClienteId" class ="form-control" asp-items="ViewBag.ClienteId"></select>
             </div> *@
+            <div class="mb-3">
+                <input type="hidden" id="CriarVenda_IdCliente" asp-for="Cliente.Id" />
+                
+                <label class="form-label">@Html.DisplayNameFor(f => f.Cliente.CPF)</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="CriarVenda_CPFCliente" asp-for="Cliente.CPF" aria-describedby="basic-addon3 basic-addon4">
+                </div>
+                <div class="form-text" id="info_cpf_consultado">O CPF sera consultado.</div>
+
+                <label class="form-label">@Html.DisplayNameFor(f => f.Cliente.Nome)</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" asp-for="Cliente.Nome" id="CriarVenda_NomeCliente" aria-describedby="basic-addon3 basic-addon4">
+                </div>
+
+                <label class="form-label">@Html.DisplayNameFor(f => f.Cliente.Telefone)</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="CriarVenda_TelefoneCliente" asp-for="Cliente.Telefone" aria-describedby="basic-addon3 basic-addon4">
+                </div>
+            </div>
             <div class="form-group">
                 <label asp-for="DataVenda" class="control-label"></label>
                 <input asp-for="DataVenda" class="form-control" />

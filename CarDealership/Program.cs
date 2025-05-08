@@ -10,6 +10,9 @@ namespace CarDealership
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Logging.ClearProviders();
+            builder.Logging.AddConsole();
+
             builder.Services.AddApplication(builder.Configuration);
 
             //builder.Services.AddControllersWithViews();

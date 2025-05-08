@@ -57,18 +57,23 @@ namespace CarDealership.Controllers
         // POST: Venda/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VeiculoId,ConcessionariaId,ClienteId,DataVenda,PrecoVenda,ProtocoloVenda,Id,CreatedAt,IsDeleted")] VendaViewModel venda)
+        public async Task<IActionResult> Create(VendaViewModel venda)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var entidadeCriada = await _service.Criar(venda);
-                TempData["Sucesso"] = $"Venda criada com sucesso!";
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var entidadeCriada = await _service.Criar(venda);
+                    TempData["Sucesso"] = $"Venda criada com sucesso!";
+                    return RedirectToAction(nameof(Index));
+                }
+                venda = await _service.ObterVendaViewModel();
+                return View(venda);
             }
-            //ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "CPF", venda.ClienteId);
-            //ViewData["ConcessionariaId"] = new SelectList(_context.Concessionarias, "Id", "Nome", venda.ConcessionariaId);
-            //ViewData["VeiculoId"] = new SelectList(_context.Veiculos, "Id", "Id", venda.VeiculoId);
-            return View(venda);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: Venda/Edit/5

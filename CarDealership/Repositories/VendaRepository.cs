@@ -17,6 +17,7 @@ namespace CarDealership.Repositories
         {
             try
             {
+                entity.Cliente = null;
                 await _context.Vendas.AddAsync(entity);
                 await _context.SaveChangesAsync();
                 return entity;
@@ -48,6 +49,9 @@ namespace CarDealership.Repositories
         public async Task<List<Venda>> GetAllAsync()
         {
             return await _context.Vendas
+                .Include(v => v.Concessionaria)
+                .Include(v => v.Cliente)
+                .Include(v => v.Veiculo)
                 .Where(f => !f.IsDeleted)
                 .ToListAsync();
         }

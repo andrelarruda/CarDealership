@@ -26,6 +26,8 @@ namespace CarDealership.Data
             {
                 v.HasKey(v => v.Id);
 
+                //v.Property(e => e.Preco).HasPrecision(10, 2);
+
                 v.HasOne(v => v.Fabricante)
                     .WithMany(f => f.Veiculos)
                     .HasForeignKey(v => v.FabricanteId)
@@ -45,6 +47,8 @@ namespace CarDealership.Data
             builder.Entity<Venda>(v =>
             {
                 v.HasKey(v => v.Id);
+
+                //v.Property(e => e.PrecoVenda).HasPrecision(10, 2);
 
                 v.HasOne(v => v.Veiculo)
                     .WithMany()

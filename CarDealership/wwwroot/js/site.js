@@ -28,7 +28,7 @@ jQuery.noConflict();
                         if (endereco) {
                             const $enderecoInput = $('input#Endereco');
                             $enderecoInput.val(endereco);
-                            $enderecoInput.attr({'background-color': 'yellow'})
+                            $enderecoInput.attr({ 'background-color': 'yellow' })
                         }
                         if (cidade) {
                             const $cidadeInput = $('input#Cidade');
@@ -45,6 +45,42 @@ jQuery.noConflict();
                     }
                 })
             }
+        });
+
+        const $CriarVendaCPFElem = $('#CriarVenda_CPFCliente');
+        $CriarVendaCPFElem.on('focusout', function () {
+            console.log($CriarVendaCPFElem.val())
+            if ($CriarVendaCPFElem && $CriarVendaCPFElem.val()) {
+                const cpf = $CriarVendaCPFElem.val().replace('.', '').replace('-', '');
+
+                if (cpf.length == 11) {
+                    $.ajax({
+                        method: 'GET',
+                        url: `/Cliente/ConsultarClientePorCPF?cpf=${cpf}`,
+                        dataType: 'json',
+                        success: function (data) {
+                            const $elem = $('#info_cpf_consultado');
+                            if (!data.id) {
+                                $elem.css({ 'color': 'red' });
+                                $elem.text('Cliente não encontrado. (Será criado um novo)');
+                                $('#CriarVenda_IdCliente').val(undefined);
+                                $('#CriarVenda_NomeCliente').val(undefined);
+                                $('#CriarVenda_TelefoneCliente').val(undefined);
+                            } else {
+                                $elem.text(undefined);
+                                $('#CriarVenda_IdCliente').val(data.id);
+                                $('#CriarVenda_NomeCliente').val(data.nome);
+                                $('#CriarVenda_TelefoneCliente').val(data.telefone);
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(`Error: ${status} - ${error}`);
+                        }
+                    });
+                }
+            }
         })
+
+        
     });
 })(jQuery);

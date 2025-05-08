@@ -30,6 +30,11 @@ namespace CarDealership.Repositories
                 .ToListAsync();
         }
 
+        public async Task<Cliente> GetByCPF(string cpf)
+        {
+            return await _context.Clientes.AsNoTracking().FirstOrDefaultAsync(c => c.CPF == cpf);
+        }
+
         public Task<Cliente> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
