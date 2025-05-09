@@ -1,5 +1,7 @@
 # Aplicação de gerenciamento de Concessionária de Veículos
 
+_Aplicação desenvolvida para o processo seletivo da empresa Intelectah._
+
 ## 🔧 Tecnologias Utilizadas
 - ASP.NET Core MVC (.NET 8.0)
 - Razor Pages
