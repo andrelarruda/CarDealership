@@ -2,7 +2,7 @@
 
 _Aplicação desenvolvida para o processo seletivo da empresa Intelectah._
 
-Para descrição das funcionalidades básicas, acesse: [https://github.com/andrelarruda/CarDealership/blob/main/Funcionalidades.md](https://github.com/andrelarruda/CarDealership/blob/main/Funcionalidades.md)
+Para descrição das funcionalidades básicas, clique no [link](https://github.com/andrelarruda/CarDealership/blob/main/Funcionalidades.md).
 
 ## 🔧 Tecnologias Utilizadas
 - ASP.NET Core MVC (.NET 8.0)
