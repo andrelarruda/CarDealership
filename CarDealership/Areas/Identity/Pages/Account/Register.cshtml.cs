@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using CarDealership.Models.Enum;
 
 namespace CarDealership.Areas.Identity.Pages.Account
 {
@@ -98,6 +99,10 @@ namespace CarDealership.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name = "Nivel de acesso")]
+            public NivelAcesso NivelAcesso { get; set; }
         }
 
 
@@ -114,6 +119,11 @@ namespace CarDealership.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+                //var user = new Usuario()
+                //{
+                //    Email = Input.Email,
+                //    NivelAcesso = Input.NivelAcesso,
+                //};
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

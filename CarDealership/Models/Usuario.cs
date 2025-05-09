@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using CarDealership.Models.Enum;
+using Microsoft.AspNetCore.Identity;
 
 namespace CarDealership.Models
 {
@@ -7,5 +8,6 @@ namespace CarDealership.Models
         public int Id { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
+        public NivelAcesso NivelAcesso { get; set; }
     }
 }

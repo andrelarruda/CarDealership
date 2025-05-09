@@ -2,6 +2,7 @@ using CarDealership.Data;
 using CarDealership.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using CarDealership.Models;
 
 namespace CarDealership
 {
@@ -10,11 +11,11 @@ namespace CarDealership
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            var connectionString = builder.Configuration.GetConnectionString("CarDealershipContextConnection") ?? throw new InvalidOperationException("Connection string 'CarDealershipContextConnection' not found.");
+            var connectionString = builder.Configuration.GetConnectionString("CarDealershipConnection") ?? throw new InvalidOperationException("Connection string 'CarDealershipContextConnection' not found.");
 
             builder.Services.AddDbContext<CarDealershipContext>(options => options.UseSqlServer(connectionString));
 
-            builder.Services.AddDefaultIdentity<Usuario>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<CarDealershipContext>();
+            builder.Services.AddDefaultIdentity<Usuario>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<CarDealershipContext>();
 
             builder.Logging.ClearProviders();
             builder.Logging.AddConsole();
@@ -43,6 +44,10 @@ namespace CarDealership
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.UseEndpoints(endpoints => {
+                endpoints.MapRazorPages();
+            });
 
             app.Run();
         }
