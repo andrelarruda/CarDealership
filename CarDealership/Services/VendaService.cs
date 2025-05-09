@@ -63,6 +63,17 @@ namespace CarDealership.Services
             await _repository.Delete(id);
         }
 
+        public async Task<VendaViewModel> ObterEditViewModel(int id)
+        {
+            Venda entity = await _repository.GetByIdAsync(id);
+            VendaViewModel result = _mapper.Map<VendaViewModel>(entity);
+            result.OpcoesConcessionarias = await _concessionariaService.ListarConcessionarias();
+            result.OpcoesVeiculos = await _veiculoService.ListarVeiculos();
+            result.OpcoesClientes = await _clienteService.ListarClientes();
+            result.ProtocoloVenda = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 20);
+            return result;
+        }
+
         public async Task<VendaViewModel> ListarPorId(int id)
         {
             Venda entity = await _repository.GetByIdAsync(id);

@@ -14,5 +14,6 @@ namespace CarDealership.Services
         Task<VendaViewModel> Editar(VendaViewModel venda);
         Task Excluir(int id);
         Task<CriarVendaViewModel> ObterVendaViewModel();
+        Task<VendaViewModel> ObterEditViewModel(int id);
     }
 }

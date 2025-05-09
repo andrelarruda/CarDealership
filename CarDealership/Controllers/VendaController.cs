@@ -88,14 +88,11 @@ namespace CarDealership.Controllers
                 return NotFound();
             }
 
-            VendaViewModel venda = await _service.ListarPorId(id.Value);
+            VendaViewModel venda = await _service.ObterEditViewModel(id.Value);
             if (venda == null)
             {
                 return NotFound();
             }
-            //ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "CPF", venda.ClienteId);
-            //ViewData["ConcessionariaId"] = new SelectList(_context.Concessionarias, "Id", "Nome", venda.ConcessionariaId);
-            //ViewData["VeiculoId"] = new SelectList(_context.Veiculos, "Id", "Id", venda.VeiculoId);
             return View(venda);
         }
 
@@ -127,6 +124,7 @@ namespace CarDealership.Controllers
             //ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "CPF", venda.ClienteId);
             //ViewData["ConcessionariaId"] = new SelectList(_context.Concessionarias, "Id", "Nome", venda.ConcessionariaId);
             //ViewData["VeiculoId"] = new SelectList(_context.Veiculos, "Id", "Id", venda.VeiculoId);
+            model = await _service.ObterEditViewModel(id);
             return View(model);
         }
 
