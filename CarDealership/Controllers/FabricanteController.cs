@@ -1,10 +1,12 @@
 ﻿using CarDealership.Models;
 using CarDealership.Models.ViewModels.Fabricante;
 using CarDealership.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarDealership.Controllers
 {
+    [Authorize(Roles = "administrador")]
     public class FabricanteController : Controller
     {
         private readonly IFabricanteService _fabricanteService;

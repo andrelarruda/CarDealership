@@ -3,11 +3,13 @@ using CarDealership.Models.Enum;
 using CarDealership.Models.ViewModels.Fabricante;
 using CarDealership.Models.ViewModels.Veiculo;
 using CarDealership.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CarDealership.Controllers
 {
+    [Authorize(Roles = "gerente")]
     public class VeiculoController : Controller
     {
         private readonly IVeiculoService _veiculoService;

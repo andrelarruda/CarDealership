@@ -5,9 +5,11 @@ using CarDealership.Models;
 using CarDealership.Services;
 using CarDealership.Models.ViewModels.Veiculo;
 using CarDealership.Models.ViewModels.Concessionaria;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarDealership.Controllers
 {
+    [Authorize(Roles = "administrador")]
     public class ConcessionariaController : Controller
     {
         private readonly IConcessionariaService _service;

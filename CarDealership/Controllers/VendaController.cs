@@ -10,9 +10,11 @@ using CarDealership.Models;
 using CarDealership.Services;
 using CarDealership.Models.ViewModels.Concessionaria;
 using CarDealership.Models.ViewModels.Venda;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarDealership.Controllers
 {
+    [Authorize(Roles = "vendedor")]
     public class VendaController : Controller
     {
         private readonly CarDealershipContext _context;

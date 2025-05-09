@@ -118,12 +118,28 @@ namespace CarDealership.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
-                //var user = new Usuario()
-                //{
-                //    Email = Input.Email,
-                //    NivelAcesso = Input.NivelAcesso,
-                //};
+                var user = new Usuario()
+                {
+                    Email = Input.Email,
+                    NivelAcesso = Input.NivelAcesso,
+                    
+                };
+                user.Email = Input.Email;
+                user.UserName = Input.Email;
+                user.NivelAcesso = Input.NivelAcesso;
+                string role = "administrador";
+                switch(Input.NivelAcesso)
+                {
+                    case NivelAcesso.Administrador:
+                        role = "administrador";
+                        break;
+                    case NivelAcesso.Vendedor:
+                        role = "vendedor";
+                        break;
+                    case NivelAcesso.Gerente:
+                        role = "gerente";
+                        break;
+                }
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -132,6 +148,8 @@ namespace CarDealership.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+                    
+                    await _userManager.AddToRoleAsync(user, role);
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

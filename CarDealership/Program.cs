@@ -11,11 +11,13 @@ namespace CarDealership
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            var connectionString = builder.Configuration.GetConnectionString("CarDealershipConnection") ?? throw new InvalidOperationException("Connection string 'CarDealershipContextConnection' not found.");
+            var connectionString = builder.Configuration.GetConnectionString("CarDealershipConnection") ?? throw new InvalidOperationException("Connection string 'CarDealershipConnection' not found.");
 
             builder.Services.AddDbContext<CarDealershipContext>(options => options.UseSqlServer(connectionString));
 
-            builder.Services.AddDefaultIdentity<Usuario>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<CarDealershipContext>();
+            builder.Services.AddDefaultIdentity<Usuario>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<CarDealershipContext>();
 
             builder.Logging.ClearProviders();
             builder.Logging.AddConsole();
