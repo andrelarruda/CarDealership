@@ -25,6 +25,9 @@ namespace CarDealership.Controllers
             _service = service;
         }
 
+        /// <summary>
+        /// Retorna a pagina de Listagem de Vendas.
+        /// </summary>
         // GET: Venda
         public async Task<ActionResult<IEnumerable<VendaViewModel>>> Index()
         {
@@ -32,6 +35,9 @@ namespace CarDealership.Controllers
             return View(result);
         }
 
+        /// <summary>
+        /// Retorna a pagina de Detalhes de Venda.
+        /// </summary>
         // GET: Venda/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -49,6 +55,9 @@ namespace CarDealership.Controllers
             return View(venda);
         }
 
+        /// <summary>
+        /// Retorna a pagina de Criacao de Venda.
+        /// </summary>
         // GET: Venda/Create
         public async Task<ActionResult<CriarVendaViewModel>> Create()
         {
@@ -56,6 +65,9 @@ namespace CarDealership.Controllers
             return View(result);
         }
 
+        /// <summary>
+        /// Recebe a requisicao POST com as informacoes de Criacao da Venda.
+        /// </summary>
         // POST: Venda/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -80,6 +92,9 @@ namespace CarDealership.Controllers
             }
         }
 
+        /// <summary>
+        /// Retorna a pagina de Edicao de Venda.
+        /// </summary>
         // GET: Venda/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -96,6 +111,9 @@ namespace CarDealership.Controllers
             return View(venda);
         }
 
+        /// <summary>
+        /// Recebe a requisicao POST com as informacoes de Edicao da Venda.
+        /// </summary>
         // POST: Venda/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -128,6 +146,9 @@ namespace CarDealership.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Recebe a requisicao POST com o Id para delecao logica da Venda.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Excluir(int id)
         {

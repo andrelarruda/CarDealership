@@ -14,6 +14,9 @@ namespace CarDealership.Controllers
             _service = service;
         }
 
+        /// <summary>
+        /// Rota utilizada pela requisicao Ajax para consultar cliente por CPF
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult> ConsultarClientePorCPF(string cpf)
         {

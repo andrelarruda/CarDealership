@@ -14,7 +14,9 @@ namespace CarDealership.Controllers
         {
             _fabricanteService = fabricanteService;
         }
-        // GET /Fabricante/
+        /// <summary>
+        /// Retorna a pagina de listagem de Fabricantes.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<List<FabricanteViewModel>>> Index()
         {
@@ -22,12 +24,18 @@ namespace CarDealership.Controllers
             return View(result);
         }
 
+        /// <summary>
+        /// Retorna a pagina de Criacao de Fabricante.
+        /// </summary>
         [HttpGet]
         public IActionResult Criar()
         {
             return View(new FabricanteViewModel());
         }
 
+        /// <summary>
+        /// Recebe a requisicao POST com as informacoes de Criacao da Fabricante.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Criar(FabricanteViewModel model)
         {
@@ -48,7 +56,9 @@ namespace CarDealership.Controllers
                 return View(model);
             }
         }
-
+        /// <summary>
+        /// Retorna a pagina de Edicao de Fabricante.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<EditarFabricanteViewModel>> Editar(int id)
         {
@@ -73,6 +83,9 @@ namespace CarDealership.Controllers
             }
         }
 
+        /// <summary>
+        /// Recebe a requisicao POST com as informacoes de Edicao da Fabricante.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Editar(EditarFabricanteViewModel model)
         {
@@ -94,6 +107,10 @@ namespace CarDealership.Controllers
             }
         }
 
+        /// <summary>
+        /// Recebe a requisicao POST com o id, para Deletar logicamente a Fabricante.
+        /// Retorna a pagina de Criacao de Fabricante.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Excluir(int id)
         {

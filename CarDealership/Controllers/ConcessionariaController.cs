@@ -19,12 +19,18 @@ namespace CarDealership.Controllers
             _service = concessionariaService;
         }
 
+        /// <summary>
+        /// Mostra a pagina de listagem de Concessionarias.
+        /// </summary>
         public async Task<ActionResult<List<ConcessionariaViewModel>>> Index()
         {
             var result = await _service.ListarConcessionarias();
             return View(result);
         }
 
+        /// <summary>
+        /// Retorna a pagina de detalhes da Concessionaria.
+        /// </summary>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -41,11 +47,17 @@ namespace CarDealership.Controllers
             return View(concessionaria);
         }
 
+        /// <summary>
+        /// Mostra a pagina de Criacao de Concessionaria.
+        /// </summary>
         public IActionResult Create()
         {
             return View(new ConcessionariaViewModel());
         }
 
+        /// <summary>
+        /// Recebe a requisicao POST com os dados para criacao de Concessionaria.
+        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Nome,Endereco,Cidade,Estado,CEP,Telefone,Email,CapacidadeMaximaVeiculos,Id,CreatedAt,IsDeleted")] ConcessionariaViewModel concessionaria)
@@ -59,6 +71,9 @@ namespace CarDealership.Controllers
             return View(concessionaria);
         }
 
+        /// <summary>
+        /// Retorna a pagina de edicao de Concessionaria.
+        /// </summary>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,6 +89,9 @@ namespace CarDealership.Controllers
             return View(concessionaria);
         }
 
+        /// <summary>
+        /// Recebe a requisicao POST com os dados para Edicao de Concessionaria.
+        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Nome,Endereco,Cidade,Estado,CEP,Telefone,Email,CapacidadeMaximaVeiculos,Id,CreatedAt,IsDeleted")] ConcessionariaViewModel model)
@@ -102,6 +120,9 @@ namespace CarDealership.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Recebe a requisicao POST com o id para Deletar a Concessionaria.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Excluir(int id)
         {

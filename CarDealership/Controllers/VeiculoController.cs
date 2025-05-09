@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CarDealership.Controllers
 {
+    /// <summary>
+    /// Controller para gerenciar os veiculos.
+    /// </summary>
     [Authorize(Roles = "gerente")]
     public class VeiculoController : Controller
     {
@@ -20,6 +23,9 @@ namespace CarDealership.Controllers
         }
 
 
+        /// <summary>
+        /// Mostra a pagina de listagem de Veiculos.
+        /// </summary>
         // GET /Veiculo
         [HttpGet]
         public async Task<ActionResult<List<VeiculoViewModel>>> Index()
@@ -28,6 +34,9 @@ namespace CarDealership.Controllers
             return View(result);
         }
 
+        /// <summary>
+        /// Mostra a pagina de criacao de veiculo.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<VeiculoViewModel>> Criar()
         {
@@ -35,6 +44,9 @@ namespace CarDealership.Controllers
             return View(result);
         }
 
+        /// <summary>
+        /// Recebe a requisicao POST com os dados de criacao do veiculo
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Criar(VeiculoViewModel model)
         {
@@ -57,6 +69,9 @@ namespace CarDealership.Controllers
             }
         }
 
+        /// <summary>
+        /// Mostra a pagina de edicao de veiculo.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<VeiculoViewModel>> Editar(int id)
         {
@@ -82,6 +97,9 @@ namespace CarDealership.Controllers
             }
         }
 
+        /// <summary>
+        /// Recebe a requisicao POST com os dados de Edicao do veiculo
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Editar(VeiculoViewModel model)
         {
@@ -103,6 +121,9 @@ namespace CarDealership.Controllers
             }
         }
 
+        /// <summary>
+        /// Recebe a requisicao POST com o id veiculo para realizar a exclusao logica
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Excluir(int id)
         {
