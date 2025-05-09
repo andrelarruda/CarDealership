@@ -1,9 +1,11 @@
 ﻿using CarDealership.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarDealership.Data
 {
-    public class CarDealershipContext : DbContext
+    public class CarDealershipContext : IdentityDbContext<Usuario>
     {
         public CarDealershipContext(DbContextOptions<CarDealershipContext> options) : base(options)
         {
@@ -65,6 +67,20 @@ namespace CarDealership.Data
                     .HasForeignKey(v => v.ClienteId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
+
+            var administrador = new IdentityRole("administrador");
+            administrador.NormalizedName = "ADMINISTRADOR";
+            administrador.Id = "5965a736-bd6f-4625-b8d3-dfef2161b8af";
+
+            var vendedor = new IdentityRole("vendedor");
+            vendedor.NormalizedName = "VENDEDOR";
+            vendedor.Id = "6559a392-fcd0-4aec-b134-422a0812c276";
+
+            var gerente = new IdentityRole("gerente");
+            gerente.NormalizedName = "GERENTE";
+            gerente.Id = "f652f91e-65e8-485e-9a5f-5af01c89fb36";
+
+            builder.Entity<IdentityRole>().HasData(administrador, vendedor, gerente);
 
             base.OnModelCreating(builder);
         }

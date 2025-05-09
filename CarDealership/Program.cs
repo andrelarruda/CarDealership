@@ -1,6 +1,7 @@
 using CarDealership.Data;
 using CarDealership.Settings;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace CarDealership
 {
@@ -9,6 +10,11 @@ namespace CarDealership
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var connectionString = builder.Configuration.GetConnectionString("CarDealershipContextConnection") ?? throw new InvalidOperationException("Connection string 'CarDealershipContextConnection' not found.");
+
+            builder.Services.AddDbContext<CarDealershipContext>(options => options.UseSqlServer(connectionString));
+
+            builder.Services.AddDefaultIdentity<Usuario>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<CarDealershipContext>();
 
             builder.Logging.ClearProviders();
             builder.Logging.AddConsole();

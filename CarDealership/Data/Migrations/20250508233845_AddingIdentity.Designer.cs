@@ -4,6 +4,7 @@ using CarDealership.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarDealership.Data.Migrations
 {
     [DbContext(typeof(CarDealershipContext))]
-    partial class CarDealershipContextModelSnapshot : ModelSnapshot
+    [Migration("20250508233845_AddingIdentity")]
+    partial class AddingIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -328,26 +331,6 @@ namespace CarDealership.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "5965a736-bd6f-4625-b8d3-dfef2161b8af",
-                            Name = "administrador",
-                            NormalizedName = "ADMINISTRADOR"
-                        },
-                        new
-                        {
-                            Id = "6559a392-fcd0-4aec-b134-422a0812c276",
-                            Name = "vendedor",
-                            NormalizedName = "VENDEDOR"
-                        },
-                        new
-                        {
-                            Id = "f652f91e-65e8-485e-9a5f-5af01c89fb36",
-                            Name = "gerente",
-                            NormalizedName = "GERENTE"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
