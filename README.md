@@ -1,4 +1,4 @@
-# Aplicativo MVC de Concessionária de Veículos
+# Aplicação de gerenciamento de Concessionária de Veículos
 
 ## 🔧 Tecnologias Utilizadas
 - ASP.NET Core MVC (.NET 8.0)
@@ -120,7 +120,14 @@ Assim que a aplicação estiver rodando:
 
 Após o registro, o usuário será automaticamente incluído no papel escolhido e redirecionado para a área correspondente do sistema.
 
+--- 
+## 📞 Informações de Contato
 
+Caso queira saber mais sobre o projeto, fico à disposição:
+
+- 📧 **E-mail:** andrebass27@gmail.com  
+- 💼 **LinkedIn:** [linkedin.com/in/andrearruuda](https://linkedin.com/in/andrearruuda)  
+- 📱 **Telefone:** (81) 98585-1220
 
 
 
