@@ -1,8 +1,70 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<Usuario> signInManager
+@inject UserManager<Usuario> UserManager
+
+@{
+    ViewData["Title"] = "Página Inicial";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Bem vindo(a) a CarDealership</h1>
+    <p class="lead">Sua plataforma completa para gerenciar concessionárias, fabricantes, veículos e vendas.</p>
+</div>
+
+<hr />
+
+<div class="row">
+    @if (User.IsInRole("administrador"))
+    {
+
+        <div class="col-md-3">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">🏭 Fabricantes</h5>
+                    <p class="card-text">Acompanhe as fabricantes de veículos e suas capacidades de produção.</p>
+                    <a href="@Url.Action("Index", "Fabricante")" class="btn btn-primary btn-sm">Ver Fabricantes</a>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (User.IsInRole("gerente"))
+    {
+        <div class="col-md-3">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">🚘 Veículos</h5>
+                    <p class="card-text">Visualize e gerencie os veículos disponíveis para venda.</p>
+                    <a href="@Url.Action("Index", "Veiculo")" class="btn btn-primary btn-sm">Ver Veículos</a>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (User.IsInRole("administrador"))
+    {
+        <div class="col-md-3">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">🚗 Concessionárias</h5>
+                    <p class="card-text">Gerencie e visualize concessionárias cadastradas em todo o país.</p>
+                    <a href="@Url.Action("Index", "Concessionaria")" class="btn btn-primary btn-sm">Ver Concessionárias</a>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (User.IsInRole("vendedor"))
+    {
+        <div class="col-md-3">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">📈 Vendas</h5>
+                    <p class="card-text">Acompanhe todas as vendas de veículos, por concessionária e por data.</p>
+                    <a href="@Url.Action("Index", "Venda")" class="btn btn-primary btn-sm">Ver Vendas</a>
+                </div>
+            </div>
+        </div>
+    }
 </div>
