@@ -30,6 +30,7 @@ namespace CarDealership.Models.ViewModels.Venda
         [DisplayName("Cliente")]
         public int ClienteId { get; set; }
 
+        [ValidateNever]
         public ClienteViewModel Cliente { get; set; }
 
         [DisplayName("Data da venda")]

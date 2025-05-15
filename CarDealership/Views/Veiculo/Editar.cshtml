@@ -45,10 +45,12 @@
     <div class="form-group mb-2">
         <label class="form-label">@Html.DisplayNameFor(f => f.TipoVeiculo)</label>
 
-        @Html.RadioButtonFor(mbox => mbox.TipoVeiculo, 0) Carro
-        @Html.RadioButtonFor(mbox => mbox.TipoVeiculo, 1) Moto
-        @Html.RadioButtonFor(mbox => mbox.TipoVeiculo, 2) Caminhao
-        @Html.RadioButtonFor(mbox => mbox.TipoVeiculo, 3) Onibus
+        @foreach (var type in Enum.GetValues(typeof(CarDealership.Models.Enum.ETipoVeiculo)))
+        {
+            <label>
+                @Html.RadioButtonFor(m => m.TipoVeiculo, type, new { id = type }) @type
+            </label>
+        }
     </div>
     <div class="form-floating">
         <textarea class="form-control" asp-for="Descricao" placeholder="@Html.DisplayNameFor(m => m.Descricao)" id="floatingTextarea"></textarea>
